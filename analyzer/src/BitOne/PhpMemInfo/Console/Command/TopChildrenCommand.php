@@ -45,7 +45,7 @@ class TopChildrenCommand extends Command
     /**
      * {@inheritdoc}
      */
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $dumpFilename = $input->getArgument('dump-file');
 
@@ -78,7 +78,7 @@ class TopChildrenCommand extends Command
         $rows = [];
         $num = 1;
 
-        foreach($top as $ref => $children) {
+        foreach ($top as $ref => $children) {
             $rows[] = [$num ++, $ref, $children];
         }
 

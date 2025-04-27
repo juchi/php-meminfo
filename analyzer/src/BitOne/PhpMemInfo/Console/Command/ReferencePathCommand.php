@@ -43,7 +43,7 @@ class ReferencePathCommand extends Command
     /**
      * {@inheritdoc}
      */
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $dumpFilename = $input->getArgument('dump-file');
         $itemId = $input->getArgument('item-id');
@@ -69,37 +69,6 @@ class ReferencePathCommand extends Command
         }
 
         return 0;
-    }
-
-    /**
-     * Convert raw filters provided by the user into structured filter.
-     *
-     * @param array $rawFilters
-     *
-     * @return array
-     */
-    protected function convertFilters(array $rawFilters)
-    {
-        $filters = [];
-
-        foreach ($rawFilters as $rawFilter) {
-            $filterParts = [];
-            preg_match('/^([^=~]+)([=~])(.+)$/', $rawFilter, $filterParts);
-
-            if (count($filterParts) !== 4) {
-                throw new \InvalidArgumentException(
-                    sprintf('Provided filter is invalid:%s', $rawFilter)
-                );
-            }
-
-            $attribute = $filterParts[1];
-            $operator = $filterParts[2];
-            $value = $filterParts[3];
-
-            $filters[$attribute] = ['operator' => $operator, 'value' => $value];
-        }
-
-        return $filters;
     }
 
     /**
@@ -179,7 +148,7 @@ class ReferencePathCommand extends Command
      *
      * @return array
      */
-    protected function prepareVertexData(Vertex $vertex)
+    protected function prepareVertexData(Vertex $vertex): array
     {
         $formatter = $this->getHelper('formatter');
 
@@ -208,19 +177,5 @@ class ReferencePathCommand extends Command
         }
 
         return $data;
-    }
-
-    /**
-     * Get the widest string length from an array.
-     *
-     * @param array $input
-     *
-     * @return int
-     */
-    protected function getMaxStringLength(array $input)
-    {
-        return array_reduce($input, function ($result, $string) {
-            return max($result, strlen($string[0]));
-        });
     }
 }

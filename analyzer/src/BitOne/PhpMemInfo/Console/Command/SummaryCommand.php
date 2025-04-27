@@ -39,7 +39,7 @@ class SummaryCommand extends Command
     /**
      * {@inheritdoc}
      */
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $dumpFilename = $input->getArgument('dump-file');
 
@@ -67,13 +67,11 @@ class SummaryCommand extends Command
      */
     protected function formatTable(array $summary, Table $table)
     {
-        $formatter = $this->getHelper('formatter');
-
         $table->setHeaders(['Type', 'Instances Count', 'Cumulated Self Size (bytes)']);
 
         $rows = [];
 
-        foreach($summary as $type => $stats) {
+        foreach ($summary as $type => $stats) {
             $rows[] = [$type, $stats['count'], $stats['self_size']];
         }
 

@@ -51,7 +51,7 @@ class QueryCommand extends Command
     /**
      * {@inheritdoc}
      */
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $dumpFilename = $input->getArgument('dump-file');
 
@@ -94,7 +94,7 @@ class QueryCommand extends Command
      *
      * @return array
      */
-    protected function convertFilters(array $rawFilters)
+    protected function convertFilters(array $rawFilters): array
     {
         $filters = [];
 

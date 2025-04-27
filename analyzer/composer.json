@@ -4,9 +4,10 @@
     "type": "project",
     "description": "Tools to analyze meminfo dump files",
     "require": {
-        "symfony/console" : "^3.4 || ^4.4 || ^5.0",
-        "symfony/filesystem" : "^3.4 || ^4.4 || ^5.0",
-        "symfony/serializer" : "^3.4 || ^4.4 || ^5.0",
+        "php": "^7.0 || ^8.0",
+        "symfony/console" : "^3.4 || ^4.4 || ^5.4 || ^6.0 || ^7.0",
+        "symfony/filesystem" : "^3.4 || ^4.4 || ^5.0 || ^6.0 || ^7.0",
+        "symfony/serializer" : "^3.4 || ^4.4 || ^5.0 || ^6.0 || ^7.0",
         "clue/graph": "^0.9.0",
         "graphp/algorithms": "^0.8.1"
     },
