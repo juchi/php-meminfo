@@ -10,7 +10,7 @@ One of the main sources of inspiration for this tool is the Java jmap tool with 
 
 Compatibility
 -------------
-PHP 7.x, 8.0.
+PHP 7.x, 8.x.
 
 For older versions of PHP, you can use the following releases:
  - 5.6: PHP Meminfo v1.1

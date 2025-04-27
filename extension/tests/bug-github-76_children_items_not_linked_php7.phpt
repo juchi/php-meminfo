@@ -3,6 +3,7 @@ Check that all children items are properly linked through their identifiers
 --SKIPIF--
 <?php
     if (!extension_loaded('json')) die('skip json ext not loaded');
+    if (PHP_VERSION_ID >= 80200) die('skip PHP8.2+ deprecates dynamic property declaration');
 ?>
 --FILE--
 

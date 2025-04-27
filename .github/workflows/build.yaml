@@ -4,13 +4,13 @@ on: push
 
 jobs:
   build:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-24.04
     strategy:
       matrix:
-        php-versions: ['7.0', '7.1', '7.2', '7.3', '7.4', '8.0', '8.1']
+        php-versions: ['7.0', '7.1', '7.2', '7.3', '7.4', '8.0', '8.1', '8.2', '8.3', '8.4']
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
@@ -26,24 +26,25 @@ jobs:
           make
 
       - name: Test the extension (PHP 7)
-        if: matrix.php-versions != '8.0' and matrix.php-versions == '8.1'
+        if: matrix.php-versions <= '7.4'
         run: |
           cd extension/
           REPORT_EXIT_STATUS=1 NO_INTERACTION=1 TEST_PHP_EXECUTABLE=$(which php) $(which php) run-tests.php -d extension=$PWD/modules/meminfo.so
 
       - name: Test the extension (PHP 8)
-        if: matrix.php-versions == '8.0' or matrix.php-versions == '8.1'
+        if: matrix.php-versions >= '8.0'
         run: |
           cd extension/
           REPORT_EXIT_STATUS=1 NO_INTERACTION=1 make test
 
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v4
         if: failure()
         with:
           name: ext-tests-output
           path: 'extension/tests/*.out'
 
       - name: Test the analyzers
+        if: matrix.php-versions != '8.4'
         run: |
           cd analyzer
           composer install
